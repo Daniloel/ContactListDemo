@@ -3,22 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ContactListDemo.View.ContactsView">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Text="fetchcontacts" Command="{Binding FetchContactCommand}" VerticalOptions="Center" HorizontalOptions="Center" />
-            <ListView Grid.Row="1" ItemsSource="{Binding ContactList}">
+        <StackLayout
+            Orientation="Vertical"
+            Padding="10">
+            <Button Text="Get Contacts" Command="{Binding FetchContactCommand}" VerticalOptions="Center" HorizontalOptions="Center" />
+            <ListView HasUnevenRows="True" ItemsSource="{Binding ContactList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding Contact_DisplayName}"/>
-                            <Label Text="{Binding Contact_Number}"/>
+                            <StackLayout
+                                Padding="10">
+                                <Label 
+                                    Text="{Binding Contact_DisplayName}"
+                                    FontAttributes="Bold"
+                                    TextColor="Navy"
+                                    FontSize="Large">
+                                </Label>
+                                <Label 
+                                    Text="{Binding Contact_Number}"
+                                    TextColor="DarkGray"
+                                    FontSize="Medium">
+                                </Label>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

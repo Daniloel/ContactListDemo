@@ -32,9 +32,8 @@ namespace ContactListDemo.Droid.Service
 
             foreach (var currentContact in _contacts)
             {
-                if ((currentContact.Contact_FirstName != null && currentContact.Contact_FirstName.ToLower().Contains(searchInContactsString.ToLower())) ||
-                    (currentContact.Contact_LastName != null && currentContact.Contact_LastName.ToLower().Contains(searchInContactsString.ToLower())) ||
-                    (currentContact.Contact_EmailId != null && currentContact.Contact_EmailId.ToLower().Contains(searchInContactsString.ToLower())))
+                if ((currentContact.Contact_DisplayName != null && currentContact.Contact_DisplayName.ToLower().Contains(searchInContactsString.ToLower())) ||
+                    (currentContact.Contact_Number != null && currentContact.Contact_Number.ToLower().Contains(searchInContactsString.ToLower())))
                 {
                     ResultContacts.Add(currentContact);
                 }
@@ -45,6 +44,9 @@ namespace ContactListDemo.Droid.Service
 
         public async Task<IEnumerable<Contact>> GetAllContacts()
         {
+
+            if (_contacts != null) return _contacts;
+
             var uri = ContactsContract.CommonDataKinds.Phone.ContentUri;
             var contacts = new List<Contact>();
             var ctx = Forms.Context;
@@ -83,50 +85,9 @@ namespace ContactListDemo.Droid.Service
                     }
                 }
             }
-
-            
-           
-
-            
-            _contacts = (from c in contacts orderby c.Contact_FirstName select c).ToList();
+            _contacts = (from c in contacts orderby c.Contact_DisplayName select c).ToList();
 
             return _contacts;
-
-            /*if (_contacts != null) return _contacts;
-
-
-            var contacts = new List<Contact>();
-            await _book.RequestPermission().ContinueWith(t =>
-            {
-                if (!t.Result)
-                {
-                    Console.WriteLine("Sorry ! Permission was denied by user or manifest !");
-                    return;
-                }
-                foreach (var contact in _book.ToList())
-                {
-                    Xamarin.Contacts.Phone number = new Phone();
-                    //var firstOrDefault = contact.Emails.FirstOrDefault();
-                    if (contact.Phones.FirstOrDefault() == null)
-                    {
-                        continue;
-                    }
-
-                    number = contact.Phones.FirstOrDefault();
-                    contacts.Add(new Contact()
-                    {
-                        Contact_FirstName = contact.FirstName + "====>" + number.Number,
-                        Contact_LastName = contact.LastName,
-                        //Contact_DisplayName = contact.DisplayName,
-                        //Contact_EmailId = firstOrDefault != null ? firstOrDefault.Address : String.Empty,
-                        //Contact_Number = number != null ? number.Number : String.Empty
-                    });
-                }
-            });
-
-            _contacts = (from c in contacts orderby c.Contact_FirstName select c).ToList();
-
-            return _contacts;*/
         }
 
         }

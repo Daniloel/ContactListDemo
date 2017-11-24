@@ -22,9 +22,8 @@ namespace ContactListDemo.iOS.Service
 
             foreach (var currentContact in _contacts)
             {
-                if ((currentContact.Contact_FirstName != null && currentContact.Contact_FirstName.ToLower().Contains(searchInContactsString.ToLower())) ||
-                    (currentContact.Contact_LastName != null && currentContact.Contact_LastName.ToLower().Contains(searchInContactsString.ToLower())) ||
-                    (currentContact.Contact_EmailId != null && currentContact.Contact_EmailId.ToLower().Contains(searchInContactsString.ToLower())))
+                if ((currentContact.Contact_DisplayName != null && currentContact.Contact_DisplayName.ToLower().Contains(searchInContactsString.ToLower())) ||
+                    (currentContact.Contact_Number != null && currentContact.Contact_Number.ToLower().Contains(searchInContactsString.ToLower())))
                 {
                     ResultContacts.Add(currentContact);
                 }
@@ -57,12 +56,12 @@ namespace ContactListDemo.iOS.Service
                     contacts.Add(new Contact
                     {
                         Contact_DisplayName = item.GivenName,
-                        Contact_Number = item.PhoneNumbers.ToString()
-                    });
+                        Contact_Number = item.PhoneNumbers.FirstOrDefault().ToString()
+                    });//TODO prove it in iOS, please
                 }
             }
             
-            _contacts = (from c in contacts orderby c.Contact_FirstName select c).ToList();
+            _contacts = (from c in contacts orderby c.Contact_DisplayName select c).ToList();
             
             return _contacts;
         }

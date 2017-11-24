@@ -28,6 +28,12 @@ namespace ContactListDemo.ViewModel
         }
         #endregion
 
+        #region Contructor
+        public ContactViewModel()
+        {
+        }
+        #endregion
+
         #region Command
         private Command fetchContactCommand;
         public Command FetchContactCommand
