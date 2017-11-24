@@ -12,7 +12,6 @@ using ContactListDemo.Service;
 using ContactListDemo.Droid.Service;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Contacts;
 using Android.Provider;
 using Android.Database;
 
@@ -21,11 +20,9 @@ namespace ContactListDemo.Droid.Service
 {
     public class ContactService : IContactService
     {
-        private readonly Xamarin.Contacts.AddressBook _book;
         private static IEnumerable<Contact> _contacts;
         public ContactService()
         {
-            _book = new Xamarin.Contacts.AddressBook(Forms.Context.ApplicationContext);
         }
 
         public List<Contact> FindContacts(string searchInContactsString)
