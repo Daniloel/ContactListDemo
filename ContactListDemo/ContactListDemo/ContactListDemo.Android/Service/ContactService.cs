@@ -25,7 +25,7 @@ namespace ContactListDemo.Droid.Service
         {
         }
 
-        public List<Contact> FindContacts(string searchInContactsString)
+        public async Task<List<Contact>> FindContacts(string searchInContactsString)
         {
 
             var ResultContacts = new List<Contact>();

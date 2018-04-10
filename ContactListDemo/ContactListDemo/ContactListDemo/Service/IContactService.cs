@@ -5,6 +5,6 @@
     public interface IContactService
     {
         Task<IEnumerable<Contact>> GetAllContacts();
-        List<Contact> FindContacts(string searchInContactsString);
+        Task<List<Contact>> FindContacts(string searchInContactsString);
     }
 }

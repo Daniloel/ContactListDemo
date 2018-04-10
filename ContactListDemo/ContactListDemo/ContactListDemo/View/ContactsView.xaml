@@ -6,6 +6,10 @@
         <StackLayout
             Orientation="Vertical"
             Padding="10">
+            <SearchBar
+            SearchCommand="{Binding SearchCommand}"
+                Text="{Binding SearchContact, Mode=TwoWay}">
+            </SearchBar>
             <Button Text="Get Contacts" Command="{Binding FetchContactCommand}" VerticalOptions="Center" HorizontalOptions="Center" />
             <ListView HasUnevenRows="True" ItemsSource="{Binding ContactList}">
                 <ListView.ItemTemplate>
